@@ -13,12 +13,13 @@ class HSet(object):
         Uses hash table (dict) for maintaining uniqueness and faster lookups.
     '''
 
-    def __init__(self, *args):
+    def __init__(self, args):
         '''
             Initialize / Implement the hash table from the passed initial
             sequence of values.
         '''
         self._hset_table = {}
+        self.add_all(args)
 
     @property
     def members(self):
@@ -50,34 +51,50 @@ class HSet(object):
         '''
             Adds new element in the set.
         '''
-        pass
+        self._hset_table.update({self._get_hash(element): element})
+        return element
 
     def add_all(self, elements):
         '''
             Given the sequence of elements, add them all into the set.
         '''
-        pass
+        return [self.add(element) for element in elements]
 
     def remove(self, element):
         '''
             Removes element from the set.
         '''
-        pass
+        return self._hset_table.pop(self._get_hash(element), {})
 
     def remove_all(self, elements):
         '''
             Removes all the elements from the set.
         '''
-        pass
+        return [self.remove(element) for element in elements]
 
-    def is_member(self, element):
+    def contains(self, element):
         '''
             Returns if the elements is part of the set.
         '''
-        pass
+        return self._get_hash(element) in self._hset_table
 
-    def strip(self, elements):
+    def _get_hash(self, element):
         '''
-            Preserves only the given in the set.
+            Returns the hash for the given element.
         '''
-        pass
+        return element.__hash__()
+
+    def __iter__(self):
+        '''
+            A simple generator based iterator. Trying to be lazy here.
+        '''
+        for element in self.get_all():
+            yield element
+
+    def __contains__(self, element):
+        '''
+            A magic method that gets called for in operator.
+            Provides easy to use and intuitive symantics for checking
+            membership. for ex: if element in hset
+        '''
+        return self.contains(element)
