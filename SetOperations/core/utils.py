@@ -12,4 +12,4 @@ def get_unique_identifier():
     '''
         Returns the new unique identifier - uuid.
     '''
-    return str(uuid4())
+    return str(uuid4().hex)
