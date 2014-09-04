@@ -5,17 +5,16 @@ Created on 01-Sep-2014
 
 Description: Holds the resource definitions and REST interface details.
 '''
-from tastypie.resources import Resource
-from tastypie.fields import CharField, ListField
 from django.conf.urls import url
-from tastypie.utils.urls import trailing_slash
 from django.http.response import HttpResponse
-from tastypie.utils.mime import determine_format
-from SetOperations.core.hset import HSet
 from tastypie.bundle import Bundle
-from SetOperations.core.exceptions import DoesNotExist
-from tastypie.exceptions import NotFound
+from tastypie.fields import CharField, ListField
 from tastypie.http import HttpAccepted
+from tastypie.resources import Resource
+from tastypie.utils.mime import determine_format
+from tastypie.utils.urls import trailing_slash
+
+from SetOperations.core.hset import HSet
 from SetOperations.core.operations import union, intersect, difference,\
     symm_difference
 from SetOperations.core.utils import handle_does_not_exist
