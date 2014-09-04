@@ -7,6 +7,9 @@ Description: Defines all the supported set operations and implementations.
 '''
 from SetOperations.core.hset import HSet
 
+__all__ = ["union", "intersection", "difference", "symm_difference",
+           "is_member", "perform_operation"]
+
 
 def _remove(super_set, sub_set):
     '''
