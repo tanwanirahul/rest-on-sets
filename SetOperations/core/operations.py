@@ -39,7 +39,7 @@ def difference(l_set, r_set):
         Returns the set difference between l_set and r_set (l_Set - r_set).
         This will return all the members in l_set, but not in r_set.
     '''
-    return _remove(l_set, intersect(l_set, r_set))
+    return _remove(HSet(l_set), intersect(l_set, r_set))
 
 
 def symm_difference(l_set, r_set):
