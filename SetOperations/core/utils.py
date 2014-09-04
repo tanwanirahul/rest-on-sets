@@ -6,6 +6,8 @@ Created on 01-Sep-2014
 Description: Contains all the reusable utility functions (pure functions).
 '''
 from uuid import uuid4
+from SetOperations.core.exceptions import DoesNotExist
+from tastypie.exceptions import NotFound
 
 
 def get_unique_identifier():
@@ -26,3 +28,18 @@ class ObjLikeDict(dict):
             Gets called when the attribute lookup is unsuccessful.
         '''
         return self.__getitem__(name)
+
+
+def handle_does_not_exist(func):
+    '''
+        A decorator to wrap and handle Does Not Exist exception
+    '''
+    def wrapper(*args, **kwars):
+        '''
+            Wrapps the function call - func()
+        '''
+        try:
+            return func(*args, **kwars)
+        except DoesNotExist:
+            raise NotFound("The requested resource does not exist")
+    return wrapper
