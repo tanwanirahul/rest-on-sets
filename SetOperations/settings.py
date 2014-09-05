@@ -86,4 +86,4 @@ TASTYPIE_ALLOW_MISSING_SLASH = True
 
 API_VERSION = "v1"
 
-API_ROOT = "api/"
+API_ROOT = "api"
