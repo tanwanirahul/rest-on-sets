@@ -26,63 +26,63 @@ Tutorial
 In this short tutorial, we will see how to interact with the APIs and get the desired results. We will use curl utility to demonstrate the same.
 
 1. Find out how many sets does exits in our system.
-```
-curl -i 127.0.0.1:8000/api/v1/sets
-
-HTTP/1.0 200 OK
-Date: Fri, 05 Sep 2014 11:27:39 GMT
-Server: WSGIServer/0.1 Python/2.7.3
-Vary: Accept
-X-Frame-Options: SAMEORIGIN
-Content-Type: application/json
-Cache-Control: no-cache
-
-{"meta": {"limit": 20, "next": null, "offset": 0, "previous": null, "total_count": 0}, "objects": []}
-
-```
-As we can see, the total_count is 0 and we have empty objects list. Lets create couple of Sets next.
+	```
+	curl -i 127.0.0.1:8000/api/v1/sets
+	
+	HTTP/1.0 200 OK
+	Date: Fri, 05 Sep 2014 11:27:39 GMT
+	Server: WSGIServer/0.1 Python/2.7.3
+	Vary: Accept
+	X-Frame-Options: SAMEORIGIN
+	Content-Type: application/json
+	Cache-Control: no-cache
+	
+	{"meta": {"limit": 20, "next": null, "offset": 0, "previous": null, "total_count": 0}, "objects": []}
+	
+	```
+	As we can see, the total_count is 0 and we have empty objects list. Lets create couple of Sets next.
 
 2. Create two sets for instance, Shapes and Pocker:
-```
- curl -i -X POST 127.0.0.1:8000/api/v1/sets -d '{"title": "shapes", "members": ["circle", "square", "rectangle", "diamond", "heart"]}' -H "CONTENT-TYPE: application/json"
-
+	```
+	 curl -i -X POST 127.0.0.1:8000/api/v1/sets -d '{"title": "shapes", "members": ["circle", "square", "rectangle", "diamond", "heart"]}' -H "CONTENT-TYPE: application/json"
+	
+		HTTP/1.0 201 CREATED
+		Date: Fri, 05 Sep 2014 11:28:44 GMT
+		Server: WSGIServer/0.1 Python/2.7.3
+		Vary: Accept
+		X-Frame-Options: SAMEORIGIN
+		Content-Type: text/html; charset=utf-8
+		Location: http://127.0.0.1:8000/api/v1/sets/6f41b97bd5be453698b8309741cda6a4
+	```
+	
+	```
+	curl -i -X POST 127.0.0.1:8000/api/v1/sets -d '{"title": "shapes", "members": ["diamond", "heart", "turn", "spade"]}' -H "CONTENT-TYPE: application/json"
+	
 	HTTP/1.0 201 CREATED
-	Date: Fri, 05 Sep 2014 11:28:44 GMT
+	Date: Fri, 05 Sep 2014 11:29:08 GMT
 	Server: WSGIServer/0.1 Python/2.7.3
 	Vary: Accept
 	X-Frame-Options: SAMEORIGIN
 	Content-Type: text/html; charset=utf-8
-	Location: http://127.0.0.1:8000/api/v1/sets/6f41b97bd5be453698b8309741cda6a4
-```
-
-```
-curl -i -X POST 127.0.0.1:8000/api/v1/sets -d '{"title": "shapes", "members": ["diamond", "heart", "turn", "spade"]}' -H "CONTENT-TYPE: application/json"
-
-HTTP/1.0 201 CREATED
-Date: Fri, 05 Sep 2014 11:29:08 GMT
-Server: WSGIServer/0.1 Python/2.7.3
-Vary: Accept
-X-Frame-Options: SAMEORIGIN
-Content-Type: text/html; charset=utf-8
-Location: http://127.0.0.1:8000/api/v1/sets/95c2fcb8a7bd4812a51f554efb908535
-```
-Two important pieces of information from the output are - Status code: 201 Created and Location header: this gives us the URI for newly created object.
-
-And now, check the collection of sets in the system:
-```
-curl -i 127.0.0.1:8000/api/v1/sets
-
-HTTP/1.0 200 OK
-Date: Fri, 05 Sep 2014 11:30:51 GMT
-Server: WSGIServer/0.1 Python/2.7.3
-Vary: Accept
-X-Frame-Options: SAMEORIGIN
-Content-Type: application/json
-Cache-Control: no-cache
-
-{"meta": {"limit": 20, "next": null, "offset": 0, "previous": null, "total_count": 2}, "objects": [{"id": "95c2fcb8a7bd4812a51f554efb908535", "members": ["heart", "diamond", "spade", "turn"], "resource_uri": "/api/v1/sets/95c2fcb8a7bd4812a51f554efb908535", "title": "shapes"}, {"id": "6f41b97bd5be453698b8309741cda6a4", "members": ["heart", "circle", "square", "rectangle", "diamond"], "resource_uri": "/api/v1/sets/6f41b97bd5be453698b8309741cda6a4", "title": "shapes"}]}
-```
-As expected, total_count is 2 and we have both the sets in the objects list.
+	Location: http://127.0.0.1:8000/api/v1/sets/95c2fcb8a7bd4812a51f554efb908535
+	```
+	Two important pieces of information from the output are - Status code: 201 Created and Location header: this gives us the URI for newly created object.
+	
+	And now, check the collection of sets in the system:
+	```
+	curl -i 127.0.0.1:8000/api/v1/sets
+	
+	HTTP/1.0 200 OK
+	Date: Fri, 05 Sep 2014 11:30:51 GMT
+	Server: WSGIServer/0.1 Python/2.7.3
+	Vary: Accept
+	X-Frame-Options: SAMEORIGIN
+	Content-Type: application/json
+	Cache-Control: no-cache
+	
+	{"meta": {"limit": 20, "next": null, "offset": 0, "previous": null, "total_count": 2}, "objects": [{"id": "95c2fcb8a7bd4812a51f554efb908535", "members": ["heart", "diamond", "spade", "turn"], "resource_uri": "/api/v1/sets/95c2fcb8a7bd4812a51f554efb908535", "title": "shapes"}, {"id": "6f41b97bd5be453698b8309741cda6a4", "members": ["heart", "circle", "square", "rectangle", "diamond"], "resource_uri": "/api/v1/sets/6f41b97bd5be453698b8309741cda6a4", "title": "shapes"}]}
+	```
+	As expected, total_count is 2 and we have both the sets in the objects list.
 
 3. We can fetch the details for individual Set by passing the id.
 ```
