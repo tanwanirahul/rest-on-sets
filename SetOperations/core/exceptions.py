@@ -17,3 +17,16 @@ class DoesNotExist(Exception):
             Initialize.
         '''
         Exception.__init__(self, *args, **kwargs)
+
+
+class NotAnHSet(Exception):
+    '''
+        Raised when we try to perform a set operation on Data Structure
+        which is not a set (HSet).
+    '''
+
+    def __init__(self, *args, **kwargs):
+        '''
+            Initialize.
+        '''
+        Exception.__init__(self, *args, **kwargs)
