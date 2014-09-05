@@ -25,7 +25,7 @@ Tutorial
 --------
 In this short tutorial, we will see how to interact with the APIs and get the desired results. We will use curl utility to demonstrate the same.
 
- 1. Find out how many sets does exits in our system.
+1. Find out how many sets does exits in our system.
 ```
 curl -i 127.0.0.1:8000/api/v1/sets
 
@@ -42,7 +42,7 @@ Cache-Control: no-cache
 ```
 As we can see, the total_count is 0 and we have empty objects list. Lets create couple of Sets next.
 
- 2. Create two sets for instance, Shapes and Pocker:
+2. Create two sets for instance, Shapes and Pocker:
 ```
  curl -i -X POST 127.0.0.1:8000/api/v1/sets -d '{"title": "shapes", "members": ["circle", "square", "rectangle", "diamond", "heart"]}' -H "CONTENT-TYPE: application/json"
 
@@ -322,6 +322,8 @@ Cache-Control: no-cache
 ```
 
 Notice, the total_count is 0 and the there aren't any objects in the system.
+
+
 
 
 > NOTE:
