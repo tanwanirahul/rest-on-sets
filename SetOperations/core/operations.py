@@ -6,6 +6,7 @@ Created on 01-Sep-2014
 Description: Defines all the supported set operations and implementations.
 '''
 from SetOperations.core.hset import HSet
+from SetOperations.core.utils import type_check
 
 __all__ = ["union", "intersection", "difference", "symm_difference",
            "is_member", "perform_operation"]
@@ -19,6 +20,7 @@ def _remove(super_set, sub_set):
     return super_set
 
 
+@type_check
 def union(l_set, r_set):
     '''
         Returns the set of values which is union of both the input sets.
@@ -28,6 +30,7 @@ def union(l_set, r_set):
     return result_set
 
 
+@type_check
 def intersect(l_set, r_set):
     '''
         Returns the set of values which is intersection of both the input sets.
@@ -37,6 +40,7 @@ def intersect(l_set, r_set):
     return HSet([element for element in s_set if element in o_set])
 
 
+@type_check
 def difference(l_set, r_set):
     '''
         Returns the set difference between l_set and r_set (l_Set - r_set).
@@ -45,6 +49,7 @@ def difference(l_set, r_set):
     return _remove(HSet(l_set), intersect(l_set, r_set))
 
 
+@type_check
 def symm_difference(l_set, r_set):
     '''
         Returns the symmetric set difference between l_set and r_set.
@@ -54,6 +59,7 @@ def symm_difference(l_set, r_set):
     return _remove(union(l_set, r_set), intersect(l_set, r_set))
 
 
+@type_check
 def is_member(hset, element):
     '''
         Checks and returns if the element is the member of the given set.
